@@ -21,7 +21,8 @@ class SparseEmbedding:
         }
 
     def as_dict(self) -> dict[int, float]:
-        return {int(i): float(v) for i, v in zip(self.indices, self.values)}  # type: ignore
+        # type: ignore
+        return {int(i): float(v) for i, v in zip(self.indices, self.values)}
 
     @classmethod
     def from_dict(cls, data: dict[int, float]) -> "SparseEmbedding":
@@ -42,7 +43,7 @@ class SparseTextEmbeddingBase(ModelManagement[SparseModelDescription]):
         self.model_name = model_name
         self.cache_dir = cache_dir
         self.threads = threads
-        self._local_files_only = kwargs.pop("local_files_only", False)
+        self._local_files_only = kwargs.pop("local_files_only", True)
 
     def embed(
         self,
